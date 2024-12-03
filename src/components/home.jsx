@@ -55,15 +55,14 @@ function Home() {
     setSelectedCity(city);
     setIsOpen(false);
   };
-
   const itemVariants = {
-    closed: { opacity: 0, y: 30 },
-    open: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -30 }
+    hidden: { height: 0, opacity: 0 },
+    visible: { height: "auto", opacity: 1 },
+    exit: { height: 0, opacity: 0 }
   };
 
   return (
-    <main className="font-[inter] text-[#2E2F33] font-normal scroll-smooth leading-normal space-y-24  m-auto ">
+    <main className="font-[inter]text-[#2E2F33] font-normal scroll-smooth leading-normal space-y-24  m-auto ">
       <section className="text-center space-y-2 h-auto lg:space-y-4">
         <p className="lg:text-lg text-sm leading-normal font-medium text-center w-full">
           FURNITURE STORE
@@ -71,7 +70,7 @@ function Home() {
         <h1 className="font-semibold lg:font-bold text-lg lg:text-6xl md:text-5xl m-auto lg:w-9/12">
           Discover the Artistry of Modern Contemporary Furniture
         </h1>
-        <p className="text-[#2E2F33] font-normal text-base md:text-xl lg:w-6/12 m-auto">
+        <p className="text-[#5F6980] font-normal text-base md:text-xl lg:w-6/12 m-auto">
           Experience the elegance and functionality of cutting-edge design where
           luxury meets innovation in every piece for ultimate relaxation
         </p>
@@ -87,7 +86,7 @@ function Home() {
 <h3 className=" font-semibold text-xl sm:text-2xl lg:text-4xl">Design inspiration and modern home ideas</h3> 
 <Gallerytabs />
 <div className=" flex justify- space-y-5 flex-col items-center   m-auto">
-          <p className=" font-[inter] text-[#2E2F33] text-sm">Showing 20 of 48 results</p>
+          <p className=" font-[inter]text-[#2E2F33] text-sm">Showing 20 of 48 results</p>
           <div className="w-2/4 h-1 bg-[#c0c0c2]">
   <motion.div
     initial={{ scaleX: 0 }}
@@ -101,7 +100,8 @@ function Home() {
          </div>
       </section>
       <section>
-      <div className="space-y-4">
+        <AnimatePresence>
+         <div className="space-y-4">
         {faqData.map((item, index) => (
           <div key={index} className="border-b p-4">
             <button
@@ -121,20 +121,28 @@ function Home() {
               </span>
             </button>
             <AnimatePresence>
-              {openIndex === index && (
-                <motion.div
-                  initial={{ height:'1rem' }}
-                  animate={{ height: 'fit-content', transition:{duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98]}}}
-                 exit={{ height:'1rem',}}
-                  className="overflow-hidden  lg:px-16 lg:py-6   h-fit  "
-                >
-                  <p className="lg:text-lg text-sm font-normal text-[#5F6980]">{item.answer}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      key="answer"
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={itemVariants}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="lg:text-lg text-sm text-[#2E2F33] lg:px-16 lg:py-6">
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+           
           </div>
         ))}
-      </div>
+      </div> 
+        </AnimatePresence>
+      
       </section>
       
     </main>

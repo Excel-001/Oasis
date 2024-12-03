@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes,NavLink, Outlet } from 'react-router-dom';
 
 function Category() {
     return (
-        <section id="categories" className="space-y-2 lg:space-y-9 leading-normal font-[inter]">
+        <section id="categories" className="space-y-2 lg:space-y-9 leading-normal z-0 font-[inter]">
             <p className="text-xl font-bold md:text-4xl md:font-semibold">
                 Categories
             </p>
@@ -22,7 +22,7 @@ function Category() {
                 ].map((item, index) => (
                     <div
                         key={index}
-                        className={`bg-[#F3F4F7] ${index % 3 === 0 ? 'col-span-full' : 'md:col-span-1'} col-span-full relative lg:h-[24rem] h-[14rem] sm:h-[17rem] rounded-lg p-5`}
+                        className={`bg-[#F3F4F7]  ${index % 3 === 0 ? 'col-span-full' : 'md:col-span-1'} col-span-full relative lg:h-[24rem] h-[14rem] sm:h-[17rem] rounded-lg p-5`}
                     >
                         <div className="flex h-full justify-between">
                             <div className="flex flex-col justify-center space-y-7">
@@ -57,7 +57,7 @@ function Header() {
                 <h1 className='font-semibold lg:font-bold text-lg lg:text-5xl md:text-3xl m-auto  lg:w-9/12'>
                     Get the best  of every exclusive category available.
                 </h1>
-                <p className='text-[#2E2F33] font-normal text-base    md:text-xl lg:w-6/12 m-auto'>
+                <p className='text-[#5F6980] font-normal text-base    md:text-xl lg:w-6/12 m-auto'>
                     <RevealText className=" text-center" text="At our store, we offer a diverse selection of furniture, including elegant living room sets, comfortable bedroom collections, functional office pieces, stylish dining room furniture, and versatile outdoor options. Each category is designed to blend seamlessly with your home decor, ensuring both style and comfort." />
                 </p>
                 <nav aria-label="breadcrumb">

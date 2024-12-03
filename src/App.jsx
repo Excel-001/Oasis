@@ -9,12 +9,14 @@ import SittingRoom from './components/sitting-room';
 import Accessories from './components/accessories';
 import Kitchen from './components/kitchen';
 import Bedroom from './components/bedroom';
+import Blog from './components/blog';
+import CartPage from './components/Cart';
 
 function App() {
     return (
         <BrowserRouter>
         <div className=' space-y-2 lg:space-y-9'>
-                     <section className='w-[100vw] font-[inter] text-[#2E2F33] font-normal scroll-smooth leading-normal px-4 md:px-12 lg:px-20'>
+                     <section className='w-[100vw] font-[inter]text-[#2E2F33] font-normal scroll-smooth leading-normal px-4 md:px-12 lg:px-20'>
                 <Nav />
                 <Routes>
                 <Route path="/" element={<Home />} />
@@ -24,6 +26,9 @@ function App() {
                         <Route path="/home/categories/accessories" element={<Accessories />} />
                         <Route path="/home/categories/kitchen" element={<Kitchen />} />
                         <Route path="/home/categories/bedroom" element={<Bedroom />} />
+                        <Route path="/home/blog" element={<Blog/>} />
+                  
+
                     </Routes>
             </section>
             <Footer />

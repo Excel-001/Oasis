@@ -129,7 +129,7 @@ function Accessories() {
           <h1 className="font-semibold lg:font-bold text-lg lg:text-5xl md:text-3xl m-auto lg:w-9/12">
           Accessories
           </h1>
-          <p className="text-[#2E2F33] font-normal text-base md:text-xl lg:w-6/12 m-auto">
+          <p className="text-[#5F6980] font-normal text-base md:text-xl lg:w-6/12 m-auto">
           <RevealText  text='Elevate your space with our curated selection of accessories. From elegant vases and unique wall art to cozy throw pillows and stylish rugs, our accessories are designed to add a touch of personality and charm to every room.'/>
           </p>
           <nav aria-label="breadcrumb">
@@ -260,7 +260,7 @@ function Accessories() {
                   duration: 0.5,
                   ease: "easeInOut",
                 }}
-                className="dropdown-button flex relative justify-between p-2 order-last col-start-4 w-full rounded-lg items-center lg:px-5 border text-[#2E2F33] gap-4 lg:rounded-2xl lg:py-3"
+                className="dropdown-button flex relative justify-between p-2 order-last col-start-4 w-full rounded-lg items-center lg:px-5 bordertext-[#2E2F33] gap-4 lg:rounded-2xl lg:py-3"
               >
                 <p className="font-[inter] font-normal">
                   {selectedCity ? selectedCity.name : ""}
@@ -358,7 +358,7 @@ function Accessories() {
               ))
             ) : (
             
-                 <p className="text-[#2E2F33] col-span-full my-9   text-2xl font-[Italianno] font-bold md:text-6xl lg:w-6/12 m-auto text-center ">No products found.</p>
+                 <p className="text-[#5F6980] col-span-full my-9   text-2xl font-[Italianno] font-bold md:text-6xl lg:w-6/12 m-auto text-center ">No products found.</p>
              
              
             )}
@@ -369,7 +369,7 @@ function Accessories() {
          
 
    <div className="flex justify-center space-y-5 flex-col items-center m-auto">
-            <p className="font-[inter] text-[#2E2F33] text-sm">
+            <p className="font-[inter]text-[#2E2F33] text-sm">
               Showing {Math.min((currentIndex + ITEMS_PER_PAGE) / filteredProducts.length * 100, 100).toFixed(0)}% of {filteredProducts.length} results
             </p>
             <div className="w-2/4 h-1 bg-[#c0c0c2]">

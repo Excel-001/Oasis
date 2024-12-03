@@ -100,8 +100,8 @@ function Top() {
       </div>
       <section className="grid font-[inter] gap-8 grid-cols-4 md:grid-cols-3 lg:grid-cols-4">
         {displayedProducts.map((product) => (
-          <div key={product.id} className="col-span-2 md:col-span-1 space-y-2">
-            <div className="bg-[#F3F4F7] group relative grid grid-rows-4 h-[18rem] rounded justify-center self-center items-center">
+          <div key={product.id} className="col-span-2 border md:col-span-1 space-y-2">
+            <div className="bg-[#F3F4F7] group relative grid grid-rows-4 lg:h-[18rem] h-[12rem] rounded justify-center self-center items-center">
               <img src={product.images[0]} className="row-span-4 max-w-full self-center w-[85%] m-auto " alt={product.name} />
               <div className="justify-center absolute bottom-4 right-4 group-hover:duration-500 ease-in-out group-hover:origin-bottom group-hover:transition-all group-hover:flex hidden row-span-1">
                 <button className=" w-fit">

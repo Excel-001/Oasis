@@ -122,7 +122,7 @@ function Bedroom() {
           <h1 className="font-semibold lg:font-bold text-lg lg:text-5xl md:text-3xl m-auto lg:w-9/12">
           Bedroom
           </h1>
-          <p className="text-[#2E2F33] font-normal text-base md:text-xl lg:w-6/12 m-auto">
+          <p className="text-[#5F6980] font-normal text-base md:text-xl lg:w-6/12 m-auto">
           <RevealText text='Create your perfect sanctuary with our exquisite bedroom furniture collection. Whether you’re looking for a luxurious bed frame, cozy nightstands, or stylish dressers, our pieces combine comfort and elegance to help you unwind and rest in style.'/>
          
           </p>
@@ -254,7 +254,7 @@ function Bedroom() {
                   duration: 0.5,
                   ease: "easeInOut",
                 }}
-                className="dropdown-button flex relative justify-between p-2 order-last col-start-4 w-full rounded-lg items-center lg:px-5 border text-[#2E2F33] gap-4 lg:rounded-2xl lg:py-3"
+                className="dropdown-button flex relative justify-between p-2 order-last col-start-4 w-full rounded-lg items-center lg:px-5 bordertext-[#2E2F33] gap-4 lg:rounded-2xl lg:py-3"
               >
                 <p className="font-[inter] font-normal">
                   {selectedCity ? selectedCity.name : ""}
@@ -352,7 +352,7 @@ function Bedroom() {
               ))
             ) : (
             
-                 <p className="text-[#2E2F33] col-span-full my-9   text-2xl font-[Italianno] font-bold md:text-6xl lg:w-6/12 m-auto text-center ">No products found.</p>
+                 <p className="text-[#5F6980] col-span-full my-9   text-2xl font-[Italianno] font-bold md:text-6xl lg:w-6/12 m-auto text-center ">No products found.</p>
              
              
             )}
@@ -363,7 +363,7 @@ function Bedroom() {
          
 
    <div className="flex justify-center space-y-5 flex-col items-center m-auto">
-            <p className="font-[inter] text-[#2E2F33] text-sm">
+            <p className="font-[inter]text-[#2E2F33] text-sm">
               Showing {Math.min((currentIndex + ITEMS_PER_PAGE) / filteredProducts.length * 100, 100).toFixed(0)}% of {filteredProducts.length} results
             </p>
             <div className="w-2/4 h-1 bg-[#c0c0c2]">

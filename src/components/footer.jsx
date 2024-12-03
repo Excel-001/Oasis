@@ -1,15 +1,55 @@
 import RevealText from "./text-animation";
 import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
 
 function Footer() {
- 
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    // Function to handle scroll event
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowButton(true); // Show button when scrolled more than 200px
+      } else {
+        setShowButton(false); // Hide button when less than 200px
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
     const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   
   return (
     <section className=" m-0  font-[inter] bg-[#101010] px-4 md:px-12 py-7 lg:py-16  text-white lg:px-20">
+       {showButton && (
+        <motion.button
+          onClick={handleBackToTop}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+          className="bg-[#F3F4F7] backtop lg:right-3 right-1 bottom-3 shadow-lg w-10 h-10 flex fixed justify-center items-center rounded-full"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M18.07 10.3199C17.88 10.3199 17.69 10.2499 17.54 10.0999L12 4.55994L6.46 10.0999C6.17 10.3899 5.69 10.3899 5.4 10.0999C5.11 9.80994 5.11 9.32994 5.4 9.03994L11.47 2.96994C11.76 2.67994 12.24 2.67994 12.53 2.96994L18.6 9.03994C18.89 9.32994 18.89 9.80994 18.6 10.0999C18.46 10.2499 18.26 10.3199 18.07 10.3199Z"
+              fill="#101010"
+            />
+            <path
+              d="M12 21.2499C11.59 21.2499 11.25 20.9099 11.25 20.4999V3.66992C11.25 3.25992 11.59 2.91992 12 2.91992C12.41 2.91992 12.75 3.25992 12.75 3.66992V20.4999C12.75 20.9099 12.41 21.2499 12 21.2499Z"
+              fill="#101010"
+            />
+          </svg>
+        </motion.button>
+      )}
+ 
       <div className="  grid md:space-x-3 space-y-3 grid-cols-4 min-h-[30vh] w-full">
         <section className=" col-span-full  lg:col-span-1 flex flex-col justify-between">
               <div>
@@ -80,13 +120,7 @@ function Footer() {
         </section>
         
         <section className="col-span-full lg:col-span-1 space-y-12 flex items-end justify-between flex-col">
-            <motion.button onClick={handleBackToTop}       whileHover={{ scale: 1.1 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }} className="bg-white backtop shadow-lg w-14 h-14 flex justify-center items-center rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M18.07 10.3199C17.88 10.3199 17.69 10.2499 17.54 10.0999L12 4.55994L6.46 10.0999C6.17 10.3899 5.69 10.3899 5.4 10.0999C5.11 9.80994 5.11 9.32994 5.4 9.03994L11.47 2.96994C11.76 2.67994 12.24 2.67994 12.53 2.96994L18.6 9.03994C18.89 9.32994 18.89 9.80994 18.6 10.0999C18.46 10.2499 18.26 10.3199 18.07 10.3199Z" fill="#101010"/>
-  <path d="M12 21.2499C11.59 21.2499 11.25 20.9099 11.25 20.4999V3.66992C11.25 3.25992 11.59 2.91992 12 2.91992C12.41 2.91992 12.75 3.25992 12.75 3.66992V20.4999C12.75 20.9099 12.41 21.2499 12 21.2499Z" fill="#101010"/>
-</svg>
-            </motion.button>
+           
             <p className="text-sm opacity-60">© 2023 — Copyright</p>
             
         
