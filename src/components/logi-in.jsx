@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Modal({ showModal, setShowModal }) {
   // State to manage the content shown in the modal
-  const [modalContent, setModalContent] = useState("forgotPassword"); // 'login', 'signup', 'forgotPassword'
+  const [modalContent, setModalContent] = useState("login"); // 'login', 'signup', 'forgotPassword'
 
   return (
     <AnimatePresence>
@@ -18,12 +18,14 @@ export default function Modal({ showModal, setShowModal }) {
     animate={{ x: 0 }}
     exit={{ x: 900 }}
     transition={{ duration: 0.5 }}
-    className={`space-y-8 lg:w-2/4 lg:p-8 lg:h-full h-full flex flex-col ${
+    className={`space-y-8 lg:w-2/4 w-full lg:p-8 lg:h-full h-full flex flex-col ${
       modalContent === "" ? "items-end" : "bg-white"
     } overflow-y-auto max-h-[100vh]`}
   >
             <div className="items-center  flex">
-              <div onClick={() => setShowModal(false)} className="w-fit rounded-full bg-[#F8F7FB] p-3">
+              <div onClick={() => {
+                setModalContent("login")
+              setShowModal(false)}} className="w-fit rounded-full bg-[#F8F7FB] p-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M16.773 8.28772L8.28777 16.773C7.99785 17.0629 7.51702 17.0629 7.22711 16.773C6.93719 16.4831 6.93719 16.0023 7.22711 15.7123L15.7124 7.22706C16.0023 6.93715 16.4831 6.93715 16.773 7.22706C17.063 7.51698 17.063 7.99781 16.773 8.28772Z"

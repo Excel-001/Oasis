@@ -11,11 +11,12 @@ import Kitchen from './components/kitchen';
 import Bedroom from './components/bedroom';
 import Blog from './components/blog';
 import CartPage from './components/Cart';
-
+import { CartProvider } from './components/cartContext';
 function App() {
     return (
+        <CartProvider>
         <BrowserRouter>
-        <div className=' space-y-2 lg:space-y-9'>
+        <div className=' space-y-2  font-[inter] lg:space-y-9'>
                      <section className='w-[100vw] font-[inter]text-[#2E2F33] font-normal scroll-smooth leading-normal px-4 md:px-12 lg:px-20'>
                 <Nav />
                 <Routes>
@@ -34,6 +35,7 @@ function App() {
             <Footer />
         </div>
         </BrowserRouter>
+        </CartProvider>
     );
 }
 

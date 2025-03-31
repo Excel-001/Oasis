@@ -5,8 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AnimatedButton from "./button-strate";
 import RevealText from "./text-animation";
+import { useCart } from "./cartContext";
 
 function Accessories() {
+  const cart = useCart();
     const tabs = [
         { id: "All", title: "All", subcategory: "all" },
         { id: "sofa", title: "Sofa", subcategory: "sofa" },
@@ -28,7 +30,7 @@ function Accessories() {
       };
     
       const ITEMS_PER_PAGE = 20;
-      const [selectedTab, setSelectedTab] = useState();
+      const [selectedTab, setSelectedTab] = useState("All");
       const [allProducts, setAllProducts] = useState([]);
       const [displayedProducts, setDisplayedProducts] = useState([]);
       const [startIndex, setStartIndex] = useState(0);
@@ -47,38 +49,35 @@ function Accessories() {
       const defaultCity = categories[0];
       const [selectedCity, setSelectedCity] = useState(defaultCity);
     
+
       useEffect(() => {
         fetch("/products.json")
           .then((response) => response.json())
           .then((data) => {
-            // Filter for Accessories category
-            const accessoriesProducts = data.filter(
-              (product) => product.category === "Accessories"
+            const sittingRoomProducts = data.filter(
+              (product) => product.category === "Sitting Room"
             );
-            setAllProducts(accessoriesProducts);
-          console.log(accessoriesProducts)
-            handleTabClick(selectedTab); // Initial tab click
+            setAllProducts(sittingRoomProducts);
+            
+            // Set initial filtered products to all
+            const initialFiltered = sittingRoomProducts;
+            setFilteredProducts(initialFiltered);
+            setDisplayedProducts(initialFiltered.slice(0, ITEMS_PER_PAGE));
           })
           .catch((error) => console.error("Error fetching products:", error));
-      }, [selectedTab]);
+      }, []);
     
       const handleTabClick = (id) => {
         setSelectedTab(id);
-        setStartIndex(0);
-        setEndIndex(ITEMS_PER_PAGE);
         setCurrentIndex(0);
+        
         const selectedSubcategory = tabs.find((tab) => tab.id === id).subcategory;
-        const filteredProducts =
-          selectedSubcategory === "all"
-            ? allProducts
-            : allProducts.filter(
-                (product) => product.subsection === selectedSubcategory
-              );
-        setFilteredProducts(filteredProducts);
-        setDisplayedProducts(filteredProducts.slice(0, ITEMS_PER_PAGE));
-    
-        const percentage = Math.min((ITEMS_PER_PAGE / filteredProducts.length) * 100, 100);
-        console.log(`Tab: ${selectedTab}, Number of products: ${filteredProducts.length}, Percentage displayed: ${percentage}%`);
+        const filtered = selectedSubcategory === "all" 
+          ? allProducts 
+          : allProducts.filter(p => p.subsection === selectedSubcategory);
+        
+        setFilteredProducts(filtered);
+        setDisplayedProducts(filtered.slice(0, ITEMS_PER_PAGE));
       };
     
       const handleNext = () => {
@@ -331,7 +330,7 @@ function Accessories() {
                   <div className="justify-center absolute bottom-4 right-4 group-hover:duration-500 ease-in-out group-hover:origin-bottom group-hover:transition-all group-hover:flex hidden row-span-1">
                     <button className="w-fit">
                       <AnimatedButton
-                        onClick={handleNext}
+     onClick={() => cart.addToCart(product)}
                         buttonClass="bg-[#7C71DF] border-0"
                         textColor="text-white"
                         className="bg-slate-600"

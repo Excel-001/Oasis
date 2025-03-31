@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AnimatedButton from "./button-strate";
-
+import { useCart } from './cartContext';
 function SittingRoom() {
   const tabs = [
     { id: "All", title: "All", subcategory: "all" },
@@ -27,7 +27,7 @@ function SittingRoom() {
   };
 
   const ITEMS_PER_PAGE = 20;
-  const [selectedTab, setSelectedTab] = useState();
+  const [selectedTab, setSelectedTab] = useState("All");
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
@@ -54,28 +54,26 @@ function SittingRoom() {
           (product) => product.category === "Sitting Room"
         );
         setAllProducts(sittingRoomProducts);
-        handleTabClick(selectedTab); 
+        
+        // Set initial filtered products to all
+        const initialFiltered = sittingRoomProducts;
+        setFilteredProducts(initialFiltered);
+        setDisplayedProducts(initialFiltered.slice(0, ITEMS_PER_PAGE));
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, [selectedTab]);
+  }, []);
 
   const handleTabClick = (id) => {
     setSelectedTab(id);
-    setStartIndex(0);
-    setEndIndex(ITEMS_PER_PAGE);
     setCurrentIndex(0);
+    
     const selectedSubcategory = tabs.find((tab) => tab.id === id).subcategory;
-    const filteredProducts =
-      selectedSubcategory === "all"
-        ? allProducts
-        : allProducts.filter(
-            (product) => product.subsection === selectedSubcategory
-          );
-    setFilteredProducts(filteredProducts);
-    setDisplayedProducts(filteredProducts.slice(0, ITEMS_PER_PAGE));
-
-    const percentage = Math.min((ITEMS_PER_PAGE / filteredProducts.length) * 100, 100);
-    console.log(`Tab: ${selectedTab}, Number of products: ${filteredProducts.length}, Percentage displayed: ${percentage}%`);
+    const filtered = selectedSubcategory === "all" 
+      ? allProducts 
+      : allProducts.filter(p => p.subsection === selectedSubcategory);
+    
+    setFilteredProducts(filtered);
+    setDisplayedProducts(filtered.slice(0, ITEMS_PER_PAGE));
   };
 
   const handleNext = () => {
@@ -118,11 +116,12 @@ function SittingRoom() {
   const toggleDropdown = () => setIsOpen(!isOpen);
   const handleSelect = (category) => setSelectedCity(category);
 
+    const cart = useCart();
   const paths = ["Home", "Categories", "Sitting Room"];
   return (
     <>
-      <main className="space-y-2 lg:space-y-9">
-        <section className="text-center space-y-2 lg:space-y-3">
+      <main className="space-y-6 lg:space-y-9">
+        <section className="text-center space-y-3 lg:space-y-3">
           <h1 className="font-semibold lg:font-bold text-lg lg:text-5xl md:text-3xl m-auto lg:w-9/12">
             Sitting Room
           </h1>
@@ -141,8 +140,9 @@ function SittingRoom() {
             </ol>
           </nav>
           <div className="relative lg:w-[40.2rem] m-auto mt-1">
+        
             <input
-              type="text"
+         type="search"
               id="search"
               className="w-full pl-3 pr-10 py-2 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:outline-none focus:border-blue-500 transition-colors"
               placeholder="Search..."
@@ -243,11 +243,11 @@ function SittingRoom() {
         </div>
 
         <section className="space-y-2 lg:space-y-9">
-          <div className="flex flex-col md:flex-row md:items-center items-start justify-between">
+          <div className="flex my-9 flex-col md:flex-row md:items-center items-center justify-between">
             <p className="text-xl font-bold md:text-4xl md:font-semibold">
               Top Products
             </p>
-            <div className="w-60 relative flex gap-2 flex-col-reverse">
+            <div className="w-60 relative rounded-3xl border border-[#BABBC1] flex gap-2 flex-col-reverse">
               <motion.button
                 onClick={toggleDropdown}
                 whileHover={{ scale: 1.1 }}
@@ -320,7 +320,7 @@ function SittingRoom() {
                 key={product.id}
                 className="col-span-2 md:col-span-1 space-y-2"
               >
-                <div className="bg-[#F3F4F7] group relative grid grid-rows-4 h-[18rem] justify-center self-center items-center">
+                <div className="bg-[#F3F4F7] group relative grid grid-rows-4 lg:h-[18rem] justify-center self-center p-0 items-center">
                   <img
                     src={product.images[0]}
                     className="row-span-4 w-[85%] m-auto  self-center"
@@ -329,11 +329,11 @@ function SittingRoom() {
                   <div className="justify-center absolute bottom-4 right-4 group-hover:duration-500 ease-in-out group-hover:origin-bottom group-hover:transition-all group-hover:flex hidden row-span-1">
                     <button className="w-fit">
                       <AnimatedButton
-                        onClick={handleNext}
+                     onClick={() => cart.addToCart(product)}
                         buttonClass="bg-[#7C71DF] border-0"
                         textColor="text-white"
-                        className="bg-slate-600"
-                        text="Show more"
+                        className="bg-[#7C71DF]"
+                        text="Add to cart"
                       />
                     </button>
                   </div>
